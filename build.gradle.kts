@@ -24,6 +24,10 @@ dependencies {
     // rest assured
     implementation("io.rest-assured:rest-assured:5.4.0")
 
+    // db
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.2")
+    implementation("com.h2database:h2:2.2.224")
+
     // openAPI
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
     implementation("org.openapitools:openapi-generator-gradle-plugin:7.4.0")
