@@ -57,6 +57,12 @@ checkstyle {
     config = resources.text.fromFile("$projectDir/src/main/resources/check_rules/checkstyle.xml")
 }
 
+configurations.checkstyle {
+    resolutionStrategy.capabilitiesResolution.withCapability("com.google.collections:google-collections") {
+        select("com.google.guava:guava:0")
+    }
+}
+
 pmd {
     toolVersion = "6.55.0"
     isConsoleOutput = true
@@ -96,4 +102,13 @@ tasks.register<GenerateTask>("generateLibraryControlSystemApi") {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.withType<Checkstyle> {
+    configDirectory.set(file("$projectDir/src/main/resources/check_rules"))
+}
+
+task("codeQualityCheck") {
+    group = "verification"
+    dependsOn("checkstyleMain", "checkstyleTest", "pmdMain", "pmdTest")
 }

@@ -9,6 +9,9 @@
             Custom Ruleset for PMD
     </description>
 
+    <!-- Exclude build dir -->
+    <exclude-pattern>.*/build/.*</exclude-pattern>
+
     <!-- Best practices ruleset -->
     <rule ref="category/java/bestpractices.xml"/>
 
