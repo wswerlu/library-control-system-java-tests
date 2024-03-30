@@ -24,10 +24,16 @@ dependencies {
     // rest assured
     implementation("io.rest-assured:rest-assured:5.4.0")
 
+    // db
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.2")
+    implementation("com.h2database:h2:2.2.224")
+
     // openAPI
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
     implementation("org.openapitools:openapi-generator-gradle-plugin:7.4.0")
     implementation("org.openapitools:jackson-databind-nullable:0.2.6")
+    implementation("javax.annotation:javax.annotation-api:1.3.2")
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
 
     // junit
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
@@ -51,6 +57,12 @@ checkstyle {
     config = resources.text.fromFile("$projectDir/src/main/resources/check_rules/checkstyle.xml")
 }
 
+configurations.checkstyle {
+    resolutionStrategy.capabilitiesResolution.withCapability("com.google.collections:google-collections") {
+        select("com.google.guava:guava:0")
+    }
+}
+
 pmd {
     toolVersion = "6.55.0"
     isConsoleOutput = true
@@ -70,7 +82,7 @@ tasks.register<GenerateTask>("generateLibraryControlSystemApi") {
     val serviceName = "library_control_system"
 
     inputSpec.set("$projectDir/src/main/resources/swagger/$serviceName/swagger.json")
-    outputDir.set("${layout.buildDirectory.get()}/generated/swagger")
+    outputDir.set("${layout.buildDirectory.get()}/generated/sources/swagger")
     generateApiTests.set(false)
     skipValidateSpec.set(true)
     generateModelDocumentation.set(false)
@@ -90,4 +102,13 @@ tasks.register<GenerateTask>("generateLibraryControlSystemApi") {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.withType<Checkstyle> {
+    configDirectory.set(file("$projectDir/src/main/resources/check_rules"))
+}
+
+task("codeQualityCheck") {
+    group = "verification"
+    dependsOn("checkstyleMain", "checkstyleTest", "pmdMain", "pmdTest")
 }

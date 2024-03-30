@@ -11,4 +11,4 @@ jobs:
           distribution: 'oracle'
           java-version: '19'
       - name: Run check
-        run: ./gradlew check
+        run: ./gradlew codeQualityCheck
