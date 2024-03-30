@@ -1,0 +1,10 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+databases:
+  library-control-system:
+    jdbcUrl: jdbc:h2:tcp://localhost:9092/mem:library_control_system
+    username: test
+    password: test
+    driverClassName: org.h2.Driver
