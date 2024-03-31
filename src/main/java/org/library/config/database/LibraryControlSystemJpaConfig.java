@@ -2,6 +2,8 @@ package org.library.config.database;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -20,16 +22,13 @@ import java.util.Map;
 @EnableJpaRepositories(basePackages = "org.library.databases.library_control_system.repository",
         entityManagerFactoryRef = "libraryControlSystemEntityManagerFactory",
         transactionManagerRef = "libraryControlSystemTransactionManager")
+@EnableConfigurationProperties
 public class LibraryControlSystemJpaConfig {
 
     @Bean
+    @ConfigurationProperties("databases.library-control-system")
     public DataSource dsLibraryControlSystem() {
-        return DataSourceBuilder.create()
-                .url("jdbc:h2:tcp://localhost:9092/mem:library_control_system")
-                .username("test")
-                .password("test")
-                .driverClassName("org.h2.Driver")
-                .build();
+        return DataSourceBuilder.create().build();
     }
 
     private Map<String, String> additionalProperties() {

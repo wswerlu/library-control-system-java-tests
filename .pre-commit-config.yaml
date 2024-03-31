@@ -5,4 +5,4 @@ repos:
     - id: pmd
       args: ["-R", "src/main/resources/check_rules/pmdrules.xml"]
     - id: checkstyle
-      args: ["-c", "src/main/resources/check_rules/checkstyle.xml"]
+      args: ["-c", "src/main/resources/check_rules/checkstyle-for-pre-commit.xml"]

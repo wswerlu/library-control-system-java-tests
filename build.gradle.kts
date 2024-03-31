@@ -6,7 +6,12 @@ plugins {
     id("pmd")
     id("org.springframework.boot") version "3.2.2"
     id("org.openapi.generator") version "7.4.0"
+    id("io.qameta.allure") version "2.11.2"
+    id("io.freefair.lombok") version "8.6"
 }
+
+val allureVersion = "2.25.0"
+val springBootVersion = "3.2.2"
 
 group = "org.library"
 version = "1.0-SNAPSHOT"
@@ -23,9 +28,10 @@ repositories {
 dependencies {
     // rest assured
     implementation("io.rest-assured:rest-assured:5.4.0")
+    implementation("io.qameta.allure:allure-rest-assured:${allureVersion}")
 
     // db
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.2.2")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
     implementation("com.h2database:h2:2.2.224")
 
     // openAPI
@@ -38,10 +44,6 @@ dependencies {
     // junit
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-
-    // lombok
-    compileOnly("org.projectlombok:lombok:1.18.30")
-    annotationProcessor("org.projectlombok:lombok:1.18.30")
 }
 
 sourceSets {
@@ -111,4 +113,15 @@ tasks.withType<Checkstyle> {
 task("codeQualityCheck") {
     group = "verification"
     dependsOn("checkstyleMain", "checkstyleTest", "pmdMain", "pmdTest")
+}
+
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        autoconfigure.set(true)
+        aspectjWeaver.set(true)
+        allureJavaVersion.set(allureVersion)
+    }
 }
