@@ -13,6 +13,7 @@ import io.restassured.path.json.mapper.factory.Jackson2ObjectMapperFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.library.domain.filters.CustomExceptionFilter;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 
 import java.lang.reflect.Type;
@@ -26,6 +27,7 @@ public class RestAssuredExtension implements BeforeAllCallback {
         RestAssured.filters(
                 new RequestLoggingFilter(),
                 new ResponseLoggingFilter(),
+                new CustomExceptionFilter(),
                 new AllureRestAssured());
         RestAssured.requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
