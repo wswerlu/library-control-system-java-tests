@@ -13,9 +13,10 @@ import java.util.List;
 
 @Service
 public class AuthorApiService {
+
     private final AuthorApi authorApi = ApiClient.api(ApiClient.Config.apiConfig()).author();
 
-    @Step("[POST /authors] Создать автора с именем '{0}' и фамилией '{1}'")
+    @Step("[POST /authors] Создать автора с именем '{firstName}' и фамилией '{lastName}'")
     public AuthorDTO createAuthor(String firstName, String lastName) {
         AuthorCreateDTO body = new AuthorCreateDTO().firstName(firstName).lastName(lastName);
 
@@ -23,8 +24,8 @@ public class AuthorApiService {
                 .execute(r -> r.as(AuthorDTO.class));
     }
 
-    @Step("[GET /authors/:id] Получить автора с id = {0}")
-    public AuthorDTO getAuthorById(long id) {
+    @Step("[GET /authors/:id] Получить автора с id = {id}")
+    public AuthorDTO getAuthorById(Long id) {
         return authorApi.show1().idPath(id)
                 .execute(r -> r.as(AuthorDTO.class));
     }
@@ -35,33 +36,35 @@ public class AuthorApiService {
                 .execute(r -> r.as(new TypeRef<>() { }));
     }
 
-    @Step("[PUT /authors/:id] Изменить имя и фамилию автора с id = {0} на имя '{1}' и фамилию '{2}'")
-    public AuthorDTO updateAuthorFirstAndLastName(long id, String firstName, String lastName) {
+    @Step("[PUT /authors/:id] Изменить имя и фамилию автора с id = {id} на имя '{firstName}' и фамилию '{lastName}'")
+    public AuthorDTO updateAuthorFirstAndLastName(Long id, String firstName, String lastName) {
         AuthorUpdateDTO body = new AuthorUpdateDTO().firstName(firstName).lastName(lastName);
 
-        return authorApi.update1().idPath(id).body(body)
-                .execute(r -> r.as(AuthorDTO.class));
+        return updateAuthor(id, body);
     }
 
-    @Step("[PUT /authors/:id] Изменить имя автора с id = {0} на имя '{1}'")
-    public AuthorDTO updateAuthorFirstName(long id, String firstName) {
+    @Step("[PUT /authors/:id] Изменить имя автора с id = {id} на имя '{firstName}'")
+    public AuthorDTO updateAuthorFirstName(Long id, String firstName) {
         AuthorUpdateDTO body = new AuthorUpdateDTO().firstName(firstName);
 
-        return authorApi.update1().idPath(id).body(body)
-                .execute(r -> r.as(AuthorDTO.class));
+        return updateAuthor(id, body);
     }
 
-    @Step("[PUT /authors/:id] Изменить фамилию автора с id = {0} на фамилию '{1}'")
-    public AuthorDTO updateAuthorLastName(long id, String lastName) {
+    @Step("[PUT /authors/:id] Изменить фамилию автора с id = {id} на фамилию '{lastName}'")
+    public AuthorDTO updateAuthorLastName(Long id, String lastName) {
         AuthorUpdateDTO body = new AuthorUpdateDTO().lastName(lastName);
 
-        return authorApi.update1().idPath(id).body(body)
-                .execute(r -> r.as(AuthorDTO.class));
+        return updateAuthor(id, body);
     }
 
-    @Step("[DELETE /authors/:id] Удалить автора с id = {0}")
-    public void deleteAuthor(long id) {
+    @Step("[DELETE /authors/:id] Удалить автора с id = {id}")
+    public void deleteAuthor(Long id) {
         authorApi.delete1().idPath(id)
+                .execute(r -> r);
+    }
+
+    private AuthorDTO updateAuthor(Long id, AuthorUpdateDTO body) {
+        return authorApi.update1().idPath(id).body(body)
                 .execute(r -> r.as(AuthorDTO.class));
     }
 }
