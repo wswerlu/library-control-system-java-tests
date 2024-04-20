@@ -1,15 +1,15 @@
 package org.library.databases.library_control_system.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "books")
@@ -17,13 +17,16 @@ import java.time.LocalDate;
 @Setter
 @EqualsAndHashCode(of = {"authorId", "title"})
 @ToString
+@Accessors(chain = true)
 public class Book {
+
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "AUTHOR_ID")
-    private long authorId;
+    private Long authorId;
 
     @Column(name = "TITLE")
     private String title;

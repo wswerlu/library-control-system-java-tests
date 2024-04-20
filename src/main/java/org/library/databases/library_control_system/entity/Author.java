@@ -1,12 +1,12 @@
 package org.library.databases.library_control_system.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "authors", uniqueConstraints = @UniqueConstraint(columnNames = {"firstName", "lastName"}))
@@ -14,11 +14,13 @@ import java.time.LocalDate;
 @Setter
 @EqualsAndHashCode(of = {"firstName", "lastName"})
 @ToString
+@Accessors(chain = true)
 public class Author {
 
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "FIRST_NAME")
     private String firstName;
