@@ -19,7 +19,7 @@ public class FakeTestData {
 
     public static Author createAuthor() {
         return Instancio.of(Author.class)
-                .ignore(Select.fields(field -> "id".equals(field.getName())))
+                .ignore(Select.field("id"))
                 .supply(Select.field(Author::getFirstName), () -> FAKER.name().firstName())
                 .supply(Select.field(Author::getLastName), () -> FAKER.name().lastName())
                 .supply(Select.field(Author::getCreatedAt), () -> LocalDate.now())
