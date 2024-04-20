@@ -50,6 +50,7 @@ dependencies {
     implementation("org.instancio:instancio-junit:4.4.0")
 
     // tools
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     testImplementation("org.hamcrest:hamcrest:2.2")
 }
 
