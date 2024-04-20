@@ -1,12 +1,15 @@
 package org.library.api.library_control_system.service;
 
 import io.qameta.allure.Step;
+import io.restassured.common.mapper.TypeRef;
 import org.library.api.library_control_system.AuthorApi;
 import org.library.invoker.library_control_system.ApiClient;
 import org.library.model.library_control_system.AuthorCreateDTO;
 import org.library.model.library_control_system.AuthorDTO;
 import org.library.model.library_control_system.AuthorUpdateDTO;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AuthorApiService {
@@ -27,9 +30,9 @@ public class AuthorApiService {
     }
 
     @Step("[GET /authors] Получить всех авторов")
-    public AuthorDTO getAuthors() {
+    public List<AuthorDTO> getAuthors() {
         return authorApi.index1()
-                .execute(r -> r.as(AuthorDTO.class));
+                .execute(r -> r.as(new TypeRef<>() { }));
     }
 
     @Step("[PUT /authors/:id] Изменить имя и фамилию автора с id = {0} на имя '{1}' и фамилию '{2}'")
