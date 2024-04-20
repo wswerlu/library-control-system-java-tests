@@ -4,14 +4,8 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.library.api.library_control_system.LibraryControlSystemApiAutoConfiguration;
 import org.library.api.library_control_system.service.AuthorApiService;
-import org.library.databases.library_control_system.LibraryControlSystemDbAutoConfiguration;
 import org.library.databases.library_control_system.entity.Author;
-import org.library.databases.library_control_system.service.AuthorDbService;
-import org.library.extentions.RestAssuredExtension;
-import org.library.library_control_system.author.extentions.DeleteAllFromAuthorTableExtension;
 import org.library.model.library_control_system.AuthorDTO;
 import org.library.utils.AllureLogging;
 import org.library.utils.FakeTestData;
@@ -28,13 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @DisplayName("library-control-system")
 @Epic("library-control-system")
 @Feature("author")
-@ExtendWith({RestAssuredExtension.class, DeleteAllFromAuthorTableExtension.class})
-@SpringBootTest(classes = {LibraryControlSystemDbAutoConfiguration.class,
-        LibraryControlSystemApiAutoConfiguration.class})
-class AuthorTests {
-
-    @Autowired
-    private AuthorDbService authorDbService;
+@SpringBootTest()
+class AuthorTests extends LibraryControlSystemBaseTests {
 
     @Autowired
     private AuthorApiService authorApiService;
