@@ -4,14 +4,8 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.library.api.library_control_system.LibraryControlSystemApiAutoConfiguration;
 import org.library.api.library_control_system.service.AuthorApiService;
-import org.library.databases.library_control_system.LibraryControlSystemDbAutoConfiguration;
 import org.library.databases.library_control_system.entity.Author;
-import org.library.databases.library_control_system.service.AuthorDbService;
-import org.library.extentions.RestAssuredExtension;
-import org.library.extentions.DeleteAllFromAuthorTableExtension;
 import org.library.model.library_control_system.AuthorDTO;
 import org.library.utils.AllureLogging;
 import org.library.utils.FakeTestData;
@@ -28,13 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @DisplayName("library-control-system")
 @Epic("library-control-system")
 @Feature("author")
-@ExtendWith({RestAssuredExtension.class, DeleteAllFromAuthorTableExtension.class})
-@SpringBootTest(classes = {LibraryControlSystemDbAutoConfiguration.class,
-        LibraryControlSystemApiAutoConfiguration.class})
-class AuthorTests {
-
-    @Autowired
-    private AuthorDbService authorDbService;
+@SpringBootTest()
+class AuthorTests extends LibraryControlSystemBaseTests {
 
     @Autowired
     private AuthorApiService authorApiService;
@@ -65,8 +54,7 @@ class AuthorTests {
     @Test
     @DisplayName("[GET /authors/:id] Получение автора по id")
     void findAuthorByIdTest() {
-        Author expectedAuthor = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(expectedAuthor);
+        Author expectedAuthor = createAndSaveAuthor();
 
         AuthorDTO actualAuthor = authorApiService.getAuthorById(expectedAuthor.getId());
 
@@ -107,8 +95,7 @@ class AuthorTests {
     @Test
     @DisplayName("[PUT /authors/:id] Обновление имени и фамилии автора")
     void updateFirstAndLastNameTest() {
-        Author author = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(author);
+        Author author = createAndSaveAuthor();
         Long authorId = author.getId();
 
         Author expectedAuthor = FakeTestData.createAuthor();
@@ -131,8 +118,7 @@ class AuthorTests {
     @Test
     @DisplayName("[PUT /authors/:id] Обновление имени автора")
     void updateFirstNameTest() {
-        Author author = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(author);
+        Author author = createAndSaveAuthor();
         Long authorId = author.getId();
         String expectedLastName = author.getLastName();
 
@@ -153,8 +139,7 @@ class AuthorTests {
     @Test
     @DisplayName("[PUT /authors/:id] Обновление фамилии автора")
     void updateLastNameTest() {
-        Author author = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(author);
+        Author author = createAndSaveAuthor();
         Long authorId = author.getId();
         String expectedFirstName = author.getFirstName();
 
@@ -173,10 +158,9 @@ class AuthorTests {
     }
 
     @Test
-    @DisplayName("[GET /authors/:id] Удаление автора с указанным id")
+    @DisplayName("[DELETE /authors/:id] Удаление автора с указанным id")
     void deleteAuthorWithIdTest() {
-        Author author = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(author);
+        Author author = createAndSaveAuthor();
         Long authorId = author.getId();
 
         authorApiService.deleteAuthor(authorId);
