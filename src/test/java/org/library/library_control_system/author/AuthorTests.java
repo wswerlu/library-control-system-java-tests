@@ -54,8 +54,7 @@ class AuthorTests extends LibraryControlSystemBaseTests {
     @Test
     @DisplayName("[GET /authors/:id] Получение автора по id")
     void findAuthorByIdTest() {
-        Author expectedAuthor = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(expectedAuthor);
+        Author expectedAuthor = createAndSaveAuthor();
 
         AuthorDTO actualAuthor = authorApiService.getAuthorById(expectedAuthor.getId());
 
@@ -96,8 +95,7 @@ class AuthorTests extends LibraryControlSystemBaseTests {
     @Test
     @DisplayName("[PUT /authors/:id] Обновление имени и фамилии автора")
     void updateFirstAndLastNameTest() {
-        Author author = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(author);
+        Author author = createAndSaveAuthor();
         Long authorId = author.getId();
 
         Author expectedAuthor = FakeTestData.createAuthor();
@@ -120,8 +118,7 @@ class AuthorTests extends LibraryControlSystemBaseTests {
     @Test
     @DisplayName("[PUT /authors/:id] Обновление имени автора")
     void updateFirstNameTest() {
-        Author author = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(author);
+        Author author = createAndSaveAuthor();
         Long authorId = author.getId();
         String expectedLastName = author.getLastName();
 
@@ -142,8 +139,7 @@ class AuthorTests extends LibraryControlSystemBaseTests {
     @Test
     @DisplayName("[PUT /authors/:id] Обновление фамилии автора")
     void updateLastNameTest() {
-        Author author = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(author);
+        Author author = createAndSaveAuthor();
         Long authorId = author.getId();
         String expectedFirstName = author.getFirstName();
 
@@ -162,10 +158,9 @@ class AuthorTests extends LibraryControlSystemBaseTests {
     }
 
     @Test
-    @DisplayName("[GET /authors/:id] Удаление автора с указанным id")
+    @DisplayName("[DELETE /authors/:id] Удаление автора с указанным id")
     void deleteAuthorWithIdTest() {
-        Author author = FakeTestData.createAuthor();
-        authorDbService.saveAuthor(author);
+        Author author = createAndSaveAuthor();
         Long authorId = author.getId();
 
         authorApiService.deleteAuthor(authorId);
