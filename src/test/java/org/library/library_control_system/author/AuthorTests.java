@@ -11,7 +11,7 @@ import org.library.databases.library_control_system.LibraryControlSystemDbAutoCo
 import org.library.databases.library_control_system.entity.Author;
 import org.library.databases.library_control_system.service.AuthorDbService;
 import org.library.extentions.RestAssuredExtension;
-import org.library.extentions.DeleteAllFromAuthorTableExtension;
+import org.library.library_control_system.author.extentions.DeleteAllFromAuthorTableExtension;
 import org.library.model.library_control_system.AuthorDTO;
 import org.library.utils.AllureLogging;
 import org.library.utils.FakeTestData;
