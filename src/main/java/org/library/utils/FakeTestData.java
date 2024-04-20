@@ -4,6 +4,7 @@ import net.datafaker.Faker;
 import org.instancio.Instancio;
 import org.instancio.Select;
 import org.library.databases.library_control_system.entity.Author;
+import org.library.databases.library_control_system.entity.Book;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,6 +31,22 @@ public class FakeTestData {
     public static List<Author> createAuthors(int count) {
         return IntStream.range(0, count)
                 .mapToObj(author -> createAuthor())
+                .toList();
+    }
+
+    public static Book createBook(Long authorId) {
+        return Instancio.of(Book.class)
+                .ignore(Select.field("id"))
+                .supply(Select.field(Book::getTitle), () -> FAKER.book().title())
+                .supply(Select.field(Book::getAuthorId), () -> authorId)
+                .supply(Select.field(Book::getCreatedAt), () -> LocalDate.now())
+                .supply(Select.field(Book::getUpdatedAt), () -> LocalDate.now())
+                .create();
+    }
+
+    public static List<Book> createBooks(Long authorId, int count) {
+        return IntStream.range(0, count)
+                .mapToObj(book -> createBook(authorId))
                 .toList();
     }
 }
