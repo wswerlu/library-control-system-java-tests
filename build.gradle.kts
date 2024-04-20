@@ -44,6 +44,10 @@ dependencies {
     // junit
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    // test data
+    implementation("net.datafaker:datafaker:2.1.0")
+    implementation("org.instancio:instancio-junit:4.4.0")
 }
 
 sourceSets {
