@@ -48,6 +48,9 @@ dependencies {
     // test data
     implementation("net.datafaker:datafaker:2.1.0")
     implementation("org.instancio:instancio-junit:4.4.0")
+
+    // tools
+    testImplementation("org.hamcrest:hamcrest:2.2")
 }
 
 sourceSets {
