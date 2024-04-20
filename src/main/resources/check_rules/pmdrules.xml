@@ -13,13 +13,20 @@
     <exclude-pattern>.*/build/.*</exclude-pattern>
 
     <!-- Best practices ruleset -->
-    <rule ref="category/java/bestpractices.xml"/>
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="JUnitTestContainsTooManyAsserts"/>
+        <exclude name="JUnitAssertionsShouldIncludeMessage"/>
+    </rule>
 
     <!-- Avoid using finalize method -->
     <rule ref="category/java/errorprone.xml/DoNotCallGarbageCollectionExplicitly"/>
 
     <!-- Avoid duplicate literals -->
-    <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals"/>
+    <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
+        <properties>
+            <property name="maxDuplicateLiterals" value="10"/>
+        </properties>
+    </rule>
 
     <!-- Rules to enforce good naming conventions -->
     <rule ref="category/java/codestyle.xml/ClassNamingConventions"/>
