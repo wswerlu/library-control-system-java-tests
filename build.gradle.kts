@@ -111,7 +111,13 @@ tasks.register<GenerateTask>("generateLibraryControlSystemApi") {
 }
 
 tasks.test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        val includeTags = project.properties["includeTags"] as String?
+
+        if (!includeTags.isNullOrBlank()) {
+            includeTags(includeTags)
+        }
+    }
 }
 
 tasks.withType<Checkstyle> {

@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  library-control_system:
+    image: wswerlu/library-control-system:latest
+    ports:
+      - "8080:8080"
+      - "9092:9092"
