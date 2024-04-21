@@ -1,5 +1,6 @@
 package org.library.library_control_system.author;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.library.api.library_control_system.LibraryControlSystemApiAutoConfiguration;
 import org.library.databases.library_control_system.LibraryControlSystemDbAutoConfiguration;
@@ -14,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration(classes = {LibraryControlSystemDbAutoConfiguration.class,
         LibraryControlSystemApiAutoConfiguration.class})
 @ExtendWith({RestAssuredExtension.class, DeleteAllFromAuthorTableExtension.class})
+@Tag("library-control-system")
 class LibraryControlSystemBaseTests {
 
     protected LibraryControlSystemBaseTests() {

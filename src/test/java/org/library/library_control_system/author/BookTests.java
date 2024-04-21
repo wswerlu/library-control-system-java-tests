@@ -2,9 +2,7 @@ package org.library.library_control_system.author;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.library.api.library_control_system.service.BookApiService;
 import org.library.databases.library_control_system.entity.Author;
@@ -28,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @Epic("library-control-system")
 @Feature("book")
 @ExtendWith(DeleteAllFromBookTableExtension.class)
+@Tag("book")
 @SpringBootTest()
 class BookTests extends LibraryControlSystemBaseTests {
 

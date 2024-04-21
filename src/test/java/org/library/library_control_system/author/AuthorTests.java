@@ -3,6 +3,7 @@ package org.library.library_control_system.author;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.library.api.library_control_system.service.AuthorApiService;
 import org.library.databases.library_control_system.entity.Author;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @DisplayName("library-control-system")
 @Epic("library-control-system")
 @Feature("author")
+@Tag("author")
 @SpringBootTest()
 class AuthorTests extends LibraryControlSystemBaseTests {
 
