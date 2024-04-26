@@ -1,4 +1,4 @@
-package org.library.library_control_system.author;
+package org.library.library_control_system;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,7 +7,7 @@ import org.library.databases.library_control_system.LibraryControlSystemDbAutoCo
 import org.library.databases.library_control_system.entity.Author;
 import org.library.databases.library_control_system.service.AuthorDbService;
 import org.library.extentions.RestAssuredExtension;
-import org.library.library_control_system.author.extentions.DeleteAllFromAuthorTableExtension;
+import org.library.library_control_system.extentions.DeleteAllFromAuthorTableExtension;
 import org.library.utils.FakeTestData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
