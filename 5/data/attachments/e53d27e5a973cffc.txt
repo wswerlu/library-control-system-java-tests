@@ -1,0 +1,1 @@
+В таблицу добавлен автор Author(id=15, firstName=Dion, lastName=Mitchell, createdAt=2024-04-26, updatedAt=2024-04-26)

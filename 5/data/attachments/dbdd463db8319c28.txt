@@ -1,0 +1,1 @@
+В таблицу добавлен автор Author(id=4, firstName=Earle, lastName=Stehr, createdAt=2024-04-26, updatedAt=2024-04-26)

@@ -1,0 +1,1 @@
+В таблицу добавлена книга Book(id=9, authorId=17, title=No Highway, createdAt=2024-04-26, updatedAt=2024-04-26)

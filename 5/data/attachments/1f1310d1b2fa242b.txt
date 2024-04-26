@@ -1,0 +1,1 @@
+Checking "[]" and not a collection containing <Author(id=11, firstName=Buffy, lastName=Gulgowski, createdAt=2024-04-26, updatedAt=2024-04-26)>
