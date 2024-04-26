@@ -1,8 +1,0 @@
-repos:
-- repo: https://github.com/gherynos/pre-commit-java
-  rev: v0.2.16
-  hooks:
-    - id: pmd
-      args: ["-R", "src/main/resources/check_rules/pmdrules.xml"]
-    - id: checkstyle
-      args: ["-c", "src/main/resources/check_rules/checkstyle-for-pre-commit.xml"]
