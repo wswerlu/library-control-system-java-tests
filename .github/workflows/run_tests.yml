@@ -1,11 +1,6 @@
 name: Run tests and generate allure report
 
-on:
-  workflow_dispatch:
-    inputs:
-      TAG:
-        description: 'Tag of tests to be run'
-        required: false
+on: push
 
 jobs:
   autotests:
@@ -20,7 +15,7 @@ jobs:
           distribution: 'oracle'
           java-version: '19'
       - name: Run tests
-        run: ./gradlew clean test -PincludeTags=${{ github.event.inputs.TAG }}
+        run: ./gradlew clean test -PincludeTags=author
       - name: Get Allure history
         uses: actions/checkout@v4
         if: always()
