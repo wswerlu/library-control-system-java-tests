@@ -3,7 +3,7 @@ name: Run tests and generate allure report
 on:
   workflow_dispatch:
     inputs:
-      TAG:
+      tag:
         description: 'Tag of tests to be run'
         required: false
 
@@ -22,7 +22,7 @@ jobs:
       - name: Run tests
         run: ./gradlew clean test -PincludeTags=${{ github.event.inputs.TAG }}
       - name: Get Allure history
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
@@ -32,12 +32,13 @@ jobs:
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
-          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_results: build/allure-results
           allure_history: allure-history
       - name: Deploy report to Github Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
+        uses: peaceiris/actions-gh-pages@v3
+        with:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history

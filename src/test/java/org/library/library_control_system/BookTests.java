@@ -1,4 +1,4 @@
-package org.library.library_control_system.author;
+package org.library.library_control_system;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -8,7 +8,7 @@ import org.library.api.library_control_system.service.BookApiService;
 import org.library.databases.library_control_system.entity.Author;
 import org.library.databases.library_control_system.entity.Book;
 import org.library.databases.library_control_system.service.BookDbService;
-import org.library.library_control_system.author.extentions.DeleteAllFromBookTableExtension;
+import org.library.library_control_system.extentions.DeleteAllFromBookTableExtension;
 import org.library.model.library_control_system.BookDTO;
 import org.library.utils.AllureLogging;
 import org.library.utils.FakeTestData;

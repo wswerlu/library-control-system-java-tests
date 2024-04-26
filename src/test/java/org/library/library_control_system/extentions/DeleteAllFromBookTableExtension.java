@@ -1,4 +1,4 @@
-package org.library.library_control_system.author.extentions;
+package org.library.library_control_system.extentions;
 
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

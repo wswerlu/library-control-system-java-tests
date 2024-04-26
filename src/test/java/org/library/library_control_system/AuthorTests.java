@@ -1,4 +1,4 @@
-package org.library.library_control_system.author;
+package org.library.library_control_system;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
