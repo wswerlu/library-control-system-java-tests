@@ -15,6 +15,7 @@
 ## Запуск тестов
 
 Реализован запуск тестов с помощью GitHub Action: [Run tests and generate allure report](https://github.com/wswerlu/library-control-system-java-tests/blob/master/.github/workflows/run_tests.yml)
+
 Шаги:
 * приложение запускается в контейнере
 * запускаются тесты
